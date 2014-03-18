@@ -4,11 +4,11 @@
 	<head>
 		<meta charset="utf-8">
 		
-		<title>Island Life</title>
+		<title>How to do that JuJu you wanna do..hoo</title>
 
 		<base href="reveal.js/">
 
-		<meta name="description" content="A talk for DIBI 2013">
+		<meta name="description" content="Unconf talk for PHP NE 2014">
 		<meta name="author" content="Wes Mason">
 
 		<meta name="apple-mobile-web-app-capable" content="yes" />
@@ -76,8 +76,27 @@
 				## Example
 				    juju init
 				    juju deploy wordpress
+				    juju deploy mysql
+				    juju add-relation wordpress mysql
 				    juju add-unit mysql -n 2
 				    juju stat
+				</section>
+
+				<section>
+				## Configuration
+				    juju set mysql flavor=percona
+				    juju set haproxy global_user=haproxy_admin
+				</section>
+
+				<section>
+				## Best practice presets
+				    juju set wordpress tuning=optimized
+				</section>
+
+				<section>
+				### !( $configuration_management )
+				- 	 Use with your favour CM (Ansible, Chef, Puppet etc.)
+				- 	 CM handles machine configuration, can be mixed with service config
 				</section>
 
 				<section>
