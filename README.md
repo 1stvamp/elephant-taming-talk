@@ -1,4 +1,4 @@
-dibi-2013-talk
+PHPNE 2014 JuJu talk
 ==============
 
-Island Life talk
+How to do that JuJu that you do..hoo
