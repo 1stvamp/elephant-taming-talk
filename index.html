@@ -35,7 +35,7 @@
 			<!-- Any section element inside of this container is displayed as a slide -->
 			<div class="slides">
 				<section>
-				## How to do that JuJu you wanna do ..hoo
+				## How to deploy (pretty much) anything with Juju
 
 				Wes Mason  
 				
@@ -43,10 +43,9 @@
 				</section>
 				<section>
 				## Who?
-				- 	 @1stvamp (twitter/github)
-				- 	 Engineer at Server Density
-				- 	 I release lots of open source code
-				- 	 I have curated [phpweekly.info](http://phpweekly.info/)
+				- 	 <img src="../images/twitter.png"/>/ <img src="../images/github.png"/> `@1stvamp`
+				- 	 <img src="../images/ubuntu.png"/> Online services, [Canonical](http://www.canonical.com/)
+				- 	 <img src="../images/heart.jpg"/> Open source
 				</section>
 
 				<section>
@@ -65,26 +64,58 @@
 				</section>
 
 				<section>
+				<section>
 				## Charms
 				- 	 Re-usable
 				- 	 Best-practices for deploying/configuring a service
 				- 	 e.g. distilled expertise
 				- 	 Charm store
 				</section>
+				<section>
+				## Charm anatomy
+				- 	 **`metadata.yaml`**
+				- 	 `config.yaml`
+				- 	 `hooks/`
+				</section>
+				<section>
+				### `metadata.yaml`
+				</section>
+				<section>
+				## Charm anatomy
+				- 	 `metadata.yaml`
+				- 	 **`config.yaml`**
+				- 	 `hooks/`
+				</section>
+				<section>
+				### `config.yaml`
+				</section>
+				<section>
+				## Charm anatomy
+				- 	 `metadata.yaml`
+				- 	 `config.yaml`
+				- 	 **`hooks/`**
+				</section>
+				<section>
+				### `hooks/` directory
+				- 	 Event based orchestration
+				- 	 Development environment (local env, debug-hooks)
+				- 	 Can be written in anything (mostly Python though)
+				</section>
+				</section>
 
 				<section>
 				## Example
 				    juju init
-				    juju deploy wordpress
-				    juju deploy mysql
-				    juju add-relation wordpress mysql
-				    juju add-unit mysql -n 2
+				    juju deploy myapp
+				    juju deploy postgres
+				    juju add-relation myapp postgres
+				    juju add-unit postgres -n 2
 				    juju stat
 				</section>
 
 				<section>
 				## Configuration
-				    juju set mysql flavor=percona
+				    juju set myapp foo=bar
 				    juju set haproxy global_user=haproxy_admin
 				</section>
 
@@ -94,15 +125,15 @@
 				</section>
 
 				<section>
-				### !( $configuration_management )
-				- 	 Use with your favour CM (Ansible, Chef, Puppet etc.)
+				### Not just configuration management..
+				- 	 Use with your favourite CM (Ansible, Chef, Puppet etc.)
 				- 	 CM handles machine configuration, can be mixed with service config
 				</section>
 
 				<section>
 				<section class="exit1">
 				## sys.exit(0)
-				- 	 Slides: [github.com/1stvamp/phpne-2014-juju-talk](https://github.com/1stvamp.org/phpne-2014-juju-talk)
+				- 	 Slides: [github.com/1stvamp/juju-talk](https://github.com/1stvamp.org/juju-talk)
 				- 	 Juju: [juju.ubuntu.com](http://juju.ubuntu.com/)
 				</section>
 				<section class="exit2">
