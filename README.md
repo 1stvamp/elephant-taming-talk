@@ -1,4 +1,3 @@
-PHPNE 2014 JuJu talk
-==============
+Elephant taming for snake lovers
+================================
 
-How to do that JuJu that you do..hoo
