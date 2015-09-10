@@ -19,6 +19,7 @@
 		<link rel="stylesheet" href="css/theme/default.css" id="theme">
 		<link rel="stylesheet" href="../css/talk.css">
 		<link rel="stylesheet" href="../css/pdf.css", type="text/css" media="print">
+		<link rel="stylesheet" href="lib/css/zenburn.css">
 
 		<!--[if lt IE 9]>
 		<script src="lib/js/html5shiv.js"></script>
@@ -51,92 +52,184 @@
 				</section>
 
 				<section>
-				## Juju?
-				- 	 Service orchestration
-				- 	 Deployment tool(s)
-				- 	 Vagrant for your production infrastructure
-				- 	 Not just Ubuntu
-				</section>
-
-				<section>
-				## But why?
-				- 	 Service orientated architecture
-				- 	 Scaling
-				- 	 Configuration
+				## PHP
+				- 	 Dynamic/interpreted language
+				- 	 Web applications
+				- 	 OO, functional
+				- 	 "Personal HomePage"
+				- 	 Bad reputation
+				- 	 **Extremely popular**
 				</section>
 
 				<section>
 				<section>
-				## Charms
-				- 	 Re-usable
-				- 	 Best-practices for deploying/configuring a service
-				- 	 e.g. distilled expertise
-				- 	 Charm store
+				## Differences
+				- 	 Braces, semi-colons, mostly-ignored whitespace (C family)
+				- 	 Special variable symbol (`$`)
+				- 	 Heavily (populated | polluted) global namespace
+				- 	 Geared towards file-based inclusion (anyone remember SSI?)
+				- 	 Web server inbuilt functions and globals
+				- 	 Loosely typed, with scalar types
 				</section>
 				<section>
-				## Charm anatomy
-				- 	 **`metadata.yaml`**
-				- 	 `config.yaml`
-				- 	 `hooks/`
+				### C-stylee
+					
+					&lt;?php
+					$foo = true;
+
+					// Let's check $foo!
+					if ($foo) {
+					/**
+					 * I guess $foo was TRUE!
+					 */
+					echo 'Hello World';
+					}
+
+					# Ambiguity? I barely know her.
+					print('Goodbye');
+					exit(0);
+
 				</section>
 				<section>
-				### `metadata.yaml`
+				### Variables
+				    
+					&lt;?php
+					$foo = 'bar';
+					$baz = $foo;
+					$test = [];
+					define('MY_CONSTANT', 'hello world');
+					echo MY_CONSTANT;
+
 				</section>
 				<section>
-				## Charm anatomy
-				- 	 `metadata.yaml`
-				- 	 **`config.yaml`**
-				- 	 `hooks/`
+				### Global namespace
+				- 	 9,541 global functions and methods listed on docs.php.net
+				- 	 4,559 of these are functions without a containing class
+				- 	 Many of which rely on extensions (e.g. Apache, APC, MySQL etc.)
+				- 	 99 of which are in a namespace
 				</section>
 				<section>
-				### `config.yaml`
-				</section>
-				<section>
-				## Charm anatomy
-				- 	 `metadata.yaml`
-				- 	 `config.yaml`
-				- 	 **`hooks/`**
-				</section>
-				<section>
-				### `hooks/` directory
-				- 	 Event based orchestration
-				- 	 Development environment (local env, debug-hooks)
-				- 	 Can be written in anything (mostly Python though)
+				### Files all the way down
+				- 	 `include`, `include_once`, `require`, `require_once`
+				- 	 Namespaces (modules) are "syntax sugar", you can declare more than in a single file
+				- 	 *Importing* namespaces is done either manually (e.g. `require`), or with user-space autoload hooks
 				</section>
 				</section>
 
 				<section>
-				## Example
-				    juju init
-				    juju deploy myapp
-				    juju deploy postgres
-				    juju add-relation myapp postgres
-				    juju add-unit postgres -n 2
-				    juju stat
+				<section>
+				## Similarities
+				- 	 An "everything and the kitchen sink" philosophy
+				- 	 Lambdas, variable scoping, generators, functional helpers
+				- 	 Availability (pretty much everywhere, including Windows)
+				- 	 Healthy userspace libraries in a repository (packagist.org, the PHP'ers cheeseshop)
+				</section>
+				<section>
+				### Generators
+
+				    &lt;?php
+				    function gen_one_to_three() {
+				    	for ($i = 1; $i &lt;= 3; $i++) {
+				    	    // Note that $i is preserved between yields.
+				    	    yield $i;
+				    	 }
+				    }
+				</section>
 				</section>
 
 				<section>
-				## Configuration
-				    juju set myapp foo=bar
-				    juju set haproxy global_user=haproxy_admin
+				<section>
+				## Composer
+				### pip for PHP
+				- 	 `composer install wordpress==x.x.x`
+				- 	 packagist.org
+				- 	 Pinning (and vendoring)
+				- 	 JSON package metadata format
+				</section>
+				<section>
+				### `composer.json`
+
+					{
+						"name": "wilgucki/csv",
+						"description": "Laravel 5 package for writing and reading CSV files",
+						"keywords": ["Laravel", "csv"],
+						"license": "MIT",
+						"authors": [
+							{
+							    "name": "Maciej Wilgucki",
+							    "email": "mwilgucki+packagist@gmail.com"
+							}
+						],
+						"require": {
+							"php": "&gt;=5.5.0"
+						},
+						"autoload": {
+							    "psr-4": {
+							    "Wilgucki\\Csv\\": "src"
+							}
+						}
+					}
+				</section>
+				<section>
+				### Autoloaders
+				**Note**: Namespaces uses the `\` separator, e.g.
+
+				    {
+				         "autoload": {
+					      "psr-4": {"Acme\\": "src/"}
+				         }
+				    }
+				</section>
 				</section>
 
 				<section>
-				## Best practice presets
-				    juju set wordpress tuning=optimized
+				<section>
+				## XDebug
+				- 	 Remote debugger, with breakpoints, stepping, strack introspection etc. (think PDB or Celerys rdb)
+				- 	 Profiler (think cProfile)
+				</section>
+				<section>
+				## XDebug cont.
+				- 	 Remote debugging network protocol, with a bunch of clients (including inbuilt support in IDEs)
+				- 	 PHP C extension, with `xdebug_*` functions to call breakpoints, set profile timers etc.
+				</section>
+				<section>
+				### Helper functions
+				    
+				    &lt;?php
+				    $debug_function = function() {
+					echo xdebug_call_function();
+				    };
+				</section>
 				</section>
 
 				<section>
-				### Not just configuration management..
-				- 	 Use with your favourite CM (Ansible, Chef, Puppet etc.)
-				- 	 CM handles machine configuration, can be mixed with service config
+				## docs.php.net
+				- 	 `http://php.net/`**`function-name-here`**
+				- 	 Large project in a git repo, with build files, translations, examples etc.
+				- 	 Having a large global namespace means having GOOD documention.
 				</section>
 
 				<section>
+				<section>
+				## Migratin'
+				- 	 Long ramp up period between PHP4 and PHP5, lots of breakages
+				- 	 Majority of open source projects now on 5
+				- 	 Good support for new releases on non-cloudy-hosts
+				</section>
+				<section>
+				### What year is it, who's the president?
+				- 	 PHP 7 - faster, return type hinting, some breakages
+				- 	 HHVM - JIT based runtime, compatbile with PHP 5 (ish)
+				- 	 HippyVM - RPython implenmentation of PHP, e.g. it runs on PyPy
+				- 	 Hack - fork based on HHVM engine, with extra language features that aren't compatible
+				</section>
+				</section>
+
 				<section class="exit1">
 				## sys.exit(0)
-				- 	 Slides: [github.com/1stvamp/juju-talk](https://github.com/1stvamp.org/juju-talk)
-				- 	 Juju: [juju.ubuntu.com](http://juju.ubuntu.com/)
+				- 	 Slides: [github.com/1stvamp/elephant-taming-talk](https://github.com/1stvamp.org/elephant-taming-talk)
+				- 	 PHP: [php.net](http://php.net/)
 				</section>
 				<section class="exit2">
 				## ^D
@@ -196,7 +289,8 @@
 					{ src: '../lib/js/showdown.js', condition: function() { return !!document.querySelector( '[data-markdown]' ); } },
 					{ src: 'lib/js/data-markdown.js', condition: function() { return !!document.querySelector( '[data-markdown]' ); } },
 					{ src: '/socket.io/socket.io.js', async: true, condition: function() { return window.location.host === 'localhost:1947'; } },
-					{ src: 'plugin/speakernotes/client.js', async: true, condition: function() { return window.location.host === 'localhost:1947'; } },
+					    { src: 'plugin/speakernotes/client.js', async: true, condition: function() { return window.location.host === 'localhost:1947'; } },
+					{ src: 'lib/js/highlight.js', async: true, callback: function() { window.hljs.initHighlightingOnLoad(); } },
 				]
 				});
 			};

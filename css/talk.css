@@ -109,3 +109,14 @@ section {
   font-weight: 700;
   src: local('Lato Bold Italic'), local('Lato-BoldItalic'), url(../HkF_qI1x_noxlxhrhMQYELO3LdcAZYWl9Si6vvxL-qU.woff) format('woff');
 }
+
+pre span {
+    background: none !important;
+}
+
+pre {
+    background: #3F3F3F !important;
+}
+pre code {
+    background: none !important;
+}
