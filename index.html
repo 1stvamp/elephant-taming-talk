@@ -112,17 +112,59 @@
 				- 	 99 of which are in a namespace
 				</section>
 				<section>
+				### Meanwhile in Python..
+
+				    $ python3
+				    Python 3.4.3 (default, Mar 26 2015, 22:03:40) 
+				    [GCC 4.9.2] on linux
+				    Type "help", "copyright", "credits" or "license" for more information.
+				    &gt;&gt;&gt; len(dir(__builtins__))
+				    148
+				</section>
+				<section>
 				### Files all the way down
 				- 	 `include`, `include_once`, `require`, `require_once`
 				- 	 Namespaces (modules) are "syntax sugar", you can declare more than in a single file
 				- 	 *Importing* namespaces is done either manually (e.g. `require`), or with user-space autoload hooks
+				</section>
+				<section>
+				### Beginner friendly bootstrapping
+				- 	 `echo '&lt;?php print "Hello world";' &gt; index.php`
+				- 	 `scp index.php my_server:~/public_html`
+				- 	 Open `my_server/index.php` in a browser.
+				- 	 Hit the pub and declare you're a developer.
+				</section>
+				<section>
+				### No WSGI, no worries
+				- 	 WSGI makes sense from an engineering perspective
+				- 	 Enhances maintenance of large ongoing projects
+				- 	 Provides a standard API that all frameworks and app runners speak
+				</section>
+				<section>
+				### Meanwhile, PHP-land..
+				- 	 PHP includes a massive array of functions, variables, constants, and even some APIs for web dev.
+				- 	 `header()`, `move_uploaded_file()`,  `http_digest_parse()`, etc.
+				- 	 `$_GET`, `$_POST`, `$_REQUEST`, `$_FILES` etc.
+				- 	 This easy boostrap and deployment story makes writing an app fun for beginners.
 				</section>
 				</section>
 
 				<section>
 				<section>
 				## Similarities
+				#### simildifferities? Diffelarities? Similirences?
 				- 	 An "everything and the kitchen sink" philosophy
+				- 	 ..`serialize` (like pickle), `json`, file reading, gzip/zip handling, mail sending, databases, etc.
+				- 	 Namespaces (packages and modules)
+				</section>
+				<section>
+				## Similarities cont.
+				- 	 Type hinting (similar to PEP-484)
+				- 	 Exceptions
+				- 	 Rich data-types...kinda...ok...usually just one, but it's very rich.
+				</section>
+				<section>
+				## Similarities cont.
 				- 	 Lambdas, variable scoping, generators, functional helpers
 				- 	 Availability (pretty much everywhere, including Windows)
 				- 	 Healthy userspace libraries in a repository (packagist.org, the PHP'ers cheeseshop)
@@ -137,6 +179,60 @@
 				    	    yield $i;
 				    	 }
 				    }
+				</section>
+				<section>
+				### Namespaces
+				**Note**: Namespaces uses the `\` separator, e.g.
+
+				    &lt;?php
+				    namespace 'wesmason';
+				    class Foo {
+				    }
+				    
+				    namespace 'wesmason\bar';
+				    class Baz {
+				    }
+				</section>
+				<section>
+				### Namespaces cont.
+
+				    &lt;?php
+				    $foo = new wesmason\Foo;
+				    $baz = new wesmason\Bar\Baz();
+				</section>
+				<section>
+				### Autoloading
+
+				    &lt;?php
+				    function __autoload($class_name) {
+				        include $class_name . '.php';
+				    }
+
+				    $obj  = new MyClass1();
+				    $obj2 = new MyClass2(); 
+				</section>
+				<section>
+				### Autoloading cont.
+
+				    &lt;?php
+				    function __autoload($name) {
+					    $parts = explode($name, '\\');
+					    require $parts[0];
+				    }
+				</section>
+				<section>
+				### The Almight Array
+				- 	 Workhorse of PHP datatypes
+				- 	 tuple, namedtuple, list, dict and OrderedDict, all rolled into one
+				</section>
+				<section>
+				### array()
+
+				    &lt;?php
+				    $foo = array(1, 2, 'bar');
+				    $baz = [ 'fred' =&gt; 42, 'velma' =&gt; 50 ];
+				    assert(in_array('velma', $foo) === false);
+				    assert(in_array('fred', $baz) === true);
 				</section>
 				</section>
 
@@ -175,7 +271,7 @@
 				</section>
 				<section>
 				### Autoloaders
-				**Note**: Namespaces uses the `\` separator, e.g.
+				**Note**: That damned `\` again, e.g.
 
 				    {
 				         "autoload": {
@@ -207,6 +303,43 @@
 				</section>
 
 				<section>
+				<section>
+				## Speaking of debugging..
+				### ..what about a REPL?
+
+				- 	 php 
+				- 	 [phpsh](http://www.phpsh.org/)
+				- 	 [boris](https://github.com/borisrepl/boris)
+				</section>
+				<section>
+				### boris
+
+				    $ composer global install "d11wtq/boris"
+				    $ export PATH="$PATH:~/.composer/vendor/bin/"
+				    ...
+				    $ boris
+				</section>
+				<section>
+				### boris cont.
+
+				    $ boris
+				    [1] boris&gt; $test = ['foo', 'bar', 'baz'];
+				    // array(
+				    //   0 =&gt; 'foo',
+				    //   1 =&gt; 'bar',
+				    //   2 =&gt; 'baz'
+				    // )
+				    [2] boris&gt; foreach($test as $t) { 
+				    [2]     *&gt; echo $t . "\n";
+				    [2]     *&gt; }
+				    foo
+				    bar
+				    baz
+				    [3] boris&gt; ^D
+				</section>
+				</section>
+
+				<section>
 				## docs.php.net
 				- 	 `http://php.net/`**`function-name-here`**
 				- 	 Large project in a git repo, with build files, translations, examples etc.
@@ -222,13 +355,21 @@
 				</section>
 				<section>
 				### What year is it, who's the president?
-				- 	 PHP 7 - faster, return type hinting, some breakages
+				- 	 PHP 7 - faster, return type hinting, AST, some breakages
 				- 	 HHVM - JIT based runtime, compatible with PHP 5 (ish)
 				</section>
 				<section>
 				### Hand me my flux capacitor
 				- 	 HippyVM - RPython implementation of PHP, e.g. it runs on PyPy
 				- 	 Hack - fork based on HHVM engine, with extra language features that aren't compatible
+				</section>
+				<section>
+				### Talking about versions..
+				<img src="../images/phpversions1.png"/>
+				</section>
+				<section>
+				### Talking about (more) versions..
+				<img src="../images/phpversions2.png"/>
 				</section>
 				</section>
 
