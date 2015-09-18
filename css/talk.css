@@ -42,6 +42,15 @@ section {
     color: #767676 !important;
 }
 
+.slide-1 {
+    background-image: url('../images/elephantandsnake.png');
+    background-position: -4.5em 1em;
+}
+
+.slide-1  * {
+    background-color: transparent;
+}
+
 .slide-2 {
     background-image: url('../images/westalkwho.png');
     background-position: -3em 0;
