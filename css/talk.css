@@ -38,6 +38,17 @@ section {
     width: 100%;
 }
 
+pre span {
+    background: none !important;
+}
+
+pre {
+    background: #3F3F3F !important;
+}
+pre code {
+    background: none !important;
+}
+
 .reveal a {
     color: #767676 !important;
 }
@@ -54,6 +65,10 @@ section {
 .slide-2 {
     background-image: url('../images/westalkwho.png');
     background-position: -5em 2em;
+}
+
+.slide-2 ul {
+    opacity: 0.75;
 }
 
 .exit1 {
@@ -117,15 +132,4 @@ section {
   font-style: italic;
   font-weight: 700;
   src: local('Lato Bold Italic'), local('Lato-BoldItalic'), url(../HkF_qI1x_noxlxhrhMQYELO3LdcAZYWl9Si6vvxL-qU.woff) format('woff');
-}
-
-pre span {
-    background: none !important;
-}
-
-pre {
-    background: #3F3F3F !important;
-}
-pre code {
-    background: none !important;
 }
